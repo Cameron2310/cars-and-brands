@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Car</title>
+    <body>
+        <form action="{% url 'update_car_record' brand_id car.id%}" method="POST">
+            {% csrf_token %}
+      
+            <input type="text" name="name" value="{{car.name}}" placeholder="{{car.name}}"/>
+            <input type="submit" value="Submit" />
+          </form>
+    </body>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+[
+  {
+    "model": "cars_and_brands.brand",
+    "pk": 1,
+    "fields": {
+      "name": "Ford"
+    }
+  },
+  {
+    "model": "cars_and_brands.car",
+    "pk": 1,
+    "fields": {
+      "name": "Mustang",
+      "brand": 1
+    }
+  }
+]
