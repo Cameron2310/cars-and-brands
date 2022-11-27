@@ -5,7 +5,7 @@ class Brand(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
-        return f"{self.name}"
+        return self.name
 
 
 class Car(models.Model):
@@ -14,4 +14,4 @@ class Car(models.Model):
         Brand, on_delete=models.CASCADE, related_name="cars")
 
     def __str__(self):
-        return f"{self.brand} {self.name}"
+        return self.name

@@ -1,77 +1,63 @@
-from django.shortcuts import render, HttpResponseRedirect
-from django.urls import reverse
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import viewsets
+from .serializer import *
 from .models import *
 
 
 # Views for Brands
-def home(request):
-    data = Brand.objects.order_by('name')
 
-    brand = {'brand': data}
-    return render(request, 'home.html', brand)
-
-
-def new(request):
-    if request.method == 'POST':
-        if request.POST.get('name'):
-            brand = Brand()
-            brand.name = request.POST.get('name')
-            brand.save()
-
-    return render(request, 'new.html')
+class Home(viewsets.ModelViewSet):
+    serializer_class = CarSerializer
+    queryset = Car.objects.all()
 
 
-def brand_details(request, id):
-    brand = Brand.objects.get(id=id)
-    return render(request, 'brand_details.html', {'brand': brand.__dict__})
+class CarAPIView(APIView):
+    serializer_class = CarSerializer
+
+    def get_queryset(self):
+        cars = Car.objects.all()
+        return cars
+
+    def get(self, request):
+        id = request.query_params["id"]
+        if id != None:
+            cars = Car.objects.filter(brand=id)
+            serializer = CarSerializer(cars, many=True)
+
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+
+        try:
+            car_brand = Brand.objects.get(name=data['brand.name'])
+            new_car = Car.objects.create(name=data['name'], brand=car_brand)
+
+        except:
+            new_brand = Brand.objects.create(name=data['brand.name'])
+            new_brand.save()
+
+            new_car = Car.objects.create(name=data['name'], brand=new_brand)
+
+        new_car.save()
+
+        serializer = CarSerializer(new_car)
+
+        return Response(serializer.data)
 
 
-def edit(request, id):
-    brand = Brand.objects.get(id=id)
-    return render(request, 'edit.html', {'brand': brand.__dict__})
+class FilterBrandAPIView(APIView):
+    serializer_class = BrandSerializer
 
+    def get(self, request, name=None):
+        if name != None:
+            brand = Brand.objects.get(name=name)
+            serializer = BrandSerializer(brand)
 
-def update_record(request, id):
-    name = request.POST.get('name')
-    brand = Brand.objects.get(id=id)
-    brand.name = name
-    brand.save()
+            return Response(serializer.data)
 
-    return HttpResponseRedirect(reverse('home'))
-
-
-def cars(request, brand_id):
-    data = Car.objects.filter(brand=brand_id)
-
-    car = {'car': data, 'brand_id': brand_id}
-    return render(request, 'cars.html', car)
-
-
-def new_car(request, brand_id):
-    if request.method == 'POST':
-        if request.POST.get('name'):
-            car = Car()
-            car.name = request.POST.get('name')
-            car.brand = Brand.objects.get(id=brand_id)
-            car.save()
-
-    return render(request, 'new_car.html', {'brand_id': brand_id})
-
-
-def car_details(request, brand_id, car_id):
-    car = Car.objects.get(id=car_id)
-    return render(request, 'car_details.html', {'car': car.__dict__, 'brand_id': brand_id})
-
-
-def edit_car(request, brand_id, car_id):
-    car = Car.objects.get(id=car_id)
-    return render(request, 'edit_car.html', {'car': car.__dict__, 'brand_id': brand_id})
-
-
-def update_car_record(request, brand_id, car_id):
-    name = request.POST.get('name')
-    car = Car.objects.get(id=car_id)
-    car.name = name
-    car.save()
-
-    return HttpResponseRedirect(reverse('home'))
+        else:
+            brands = Brand.objects.all()
+            serializer = BrandSerializer(brands, many=True)
+            return Response(serializer.data)
