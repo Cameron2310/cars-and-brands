@@ -5,7 +5,7 @@ import axios from "axios";
 export default function Brand() {
   const { brandName } = useParams();
   const [data, setData] = useState();
-  const [cars, setCars] = useState();
+  const [cars, setCars] = useState(); 
 
   useEffect(() => {
     const fetchData = async () => {
