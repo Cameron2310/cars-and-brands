@@ -61,3 +61,43 @@ class FilterBrandAPIView(APIView):
             brands = Brand.objects.all()
             serializer = BrandSerializer(brands, many=True)
             return Response(serializer.data)
+
+
+class FilterCarAPIView(APIView):
+    serializer_class = CarSerializer
+
+    def get(self, request, id=None):
+        if id != None:
+            car = Car.objects.get(id=id)
+            serializer = CarSerializer(car)
+
+            return Response(serializer.data)
+
+
+class UserAPIView(APIView):
+    serializer_class = UserSerializer
+
+    def get(self, request):
+        email = request.query_params["email"]
+        print(email)
+
+        if email != None:
+            user = User.objects.get(email=email)
+            serializer = UserSerializer(user)
+
+        return Response(serializer.data)
+
+    def post(self, request):
+        data = request.data
+        print(data['params']['email'])
+
+        user_email = data['params']['email']
+        user_password = data['params']['password']
+        new_user = User.objects.create(
+            email=user_email, password=user_password)
+
+        new_user.save()
+
+        serializer = UserSerializer(new_user)
+
+        return Response(serializer.data)

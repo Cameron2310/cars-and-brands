@@ -1,30 +1,36 @@
-import { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 export default function Brand() {
   const { brandName } = useParams();
   const [data, setData] = useState();
-  const [cars, setCars] = useState(); 
+  const [cars, setCars] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios(`http://localhost:8000/api/${brandName}/`);
+      const response = await axios(`http://localhost:8000/${brandName}/`);
+      if (response === undefined) {
+        return;
+      }
       setData(response.data);
     };
     fetchData();
   }, [brandName]);
 
   useEffect(() => {
-    const car_data = async () => {
-      const response = await axios(`http://localhost:8000/api/`, {
+    const carData = async () => {
+      if (data === undefined) {
+        return;
+      }
+      const response = await axios(`http://localhost:8000`, {
         params: {
           id: data.id,
         },
       });
       setCars(response.data);
     };
-    car_data();
+    carData();
   }, [data]);
 
   if (!data || !cars) {
@@ -35,7 +41,11 @@ export default function Brand() {
         <h2>{data.name}</h2>
         <ul>
           {cars.map((car, i) => {
-            return <li key={i}>{car.name}</li>;
+            return (
+              <li key={i}>
+                <Link to={`${car.id}/`}>{car.name}</Link>
+              </li>
+            );
           })}
         </ul>
       </div>

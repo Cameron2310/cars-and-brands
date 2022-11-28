@@ -21,7 +21,7 @@ function Navbar({ props }) {
         </ul>
       </div>
       <div className="right">
-        <a href="#">Login</a>
+        <Link to="login/">Login</Link>
       </div>
     </header>
   );

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 class Brand(models.Model):
@@ -15,3 +16,16 @@ class Car(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class User(AbstractUser):
+    email = models.EmailField(
+        verbose_name='email address',
+        max_length=200,
+        unique=True
+    )
+
+    is_active: models.BooleanField(default=True)
+
+    USERNAME_FIELD: 'email'
+    REQUIRED_FIELDS = []

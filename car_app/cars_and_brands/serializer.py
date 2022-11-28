@@ -15,3 +15,10 @@ class CarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Car
         fields = ['id', 'name', 'brand']
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ['email', 'password']

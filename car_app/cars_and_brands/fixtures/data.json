@@ -7,11 +7,41 @@
     }
   },
   {
+    "model": "cars_and_brands.brand",
+    "pk": 2,
+    "fields": {
+      "name": "Kia"
+    }
+  },
+  {
+    "model": "cars_and_brands.brand",
+    "pk": 3,
+    "fields": {
+      "name": "Toyota"
+    }
+  },
+  {
     "model": "cars_and_brands.car",
     "pk": 1,
     "fields": {
       "name": "Mustang",
       "brand": 1
+    }
+  },
+  {
+    "model": "cars_and_brands.car",
+    "pk": 2,
+    "fields": {
+      "name": "Corolla",
+      "brand": 3
+    }
+  },
+  {
+    "model": "cars_and_brands.car",
+    "pk": 3,
+    "fields": {
+      "name": "Soul",
+      "brand": 2
     }
   }
 ]
