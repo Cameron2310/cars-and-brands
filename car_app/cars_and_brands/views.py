@@ -20,9 +20,9 @@ class CarAPIView(APIView):
         return cars
 
     def get(self, request):
-        id = request.query_params["id"]
-        if id != None:
-            cars = Car.objects.filter(brand=id)
+        car_id = request.query_params["id"]
+        if car_id != None:
+            cars = Car.objects.filter(brand=car_id)
             serializer = CarSerializer(cars, many=True)
 
         return Response(serializer.data)
