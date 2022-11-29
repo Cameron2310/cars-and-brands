@@ -89,10 +89,10 @@ class UserAPIView(APIView):
 
     def post(self, request):
         data = request.data
-        print(data['params']['email'])
 
         user_email = data['params']['email']
         user_password = data['params']['password']
+
         new_user = User.objects.create(
             email=user_email, password=user_password)
 

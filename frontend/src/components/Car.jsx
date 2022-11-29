@@ -19,7 +19,7 @@ export default function Car() {
   } else {
     return (
       <div>
-        {carData.brand.name} {carData.name}
+        {carData.brand.name} {carData.name} {carData.price}
       </div>
     );
   }

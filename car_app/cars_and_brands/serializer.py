@@ -6,7 +6,7 @@ class BrandSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Brand
-        fields = ["id", "name"]
+        fields = ["id", "name", "img"]
 
 
 class CarSerializer(serializers.ModelSerializer):
@@ -14,11 +14,11 @@ class CarSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Car
-        fields = ['id', 'name', 'brand']
+        fields = ['id', 'name', 'brand', 'price']
 
 
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['email', 'password']
+        fields = ['id', 'email', 'password']

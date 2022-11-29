@@ -3,21 +3,24 @@
     "model": "cars_and_brands.brand",
     "pk": 1,
     "fields": {
-      "name": "Ford"
+      "name": "Ford",
+      "img": "https://1000logos.net/wp-content/uploads/2018/02/Ford-Logo.png"
     }
   },
   {
     "model": "cars_and_brands.brand",
     "pk": 2,
     "fields": {
-      "name": "Kia"
+      "name": "Kia",
+      "img": "https://www.transformmagazine.net/media/10640/kia-old-and-new-logo.jpg?anchor=center&mode=crop&width=665&rnd=132555468930000000&bgcolor=ffffff"
     }
   },
   {
     "model": "cars_and_brands.brand",
     "pk": 3,
     "fields": {
-      "name": "Toyota"
+      "name": "Toyota",
+      "img": "https://brandculture.com/bcc-content/uploads/2014/01/toyota_blog_bcc.jpg"
     }
   },
   {
@@ -25,7 +28,8 @@
     "pk": 1,
     "fields": {
       "name": "Mustang",
-      "brand": 1
+      "brand": 1,
+      "price": "$45,000"
     }
   },
   {
@@ -33,7 +37,8 @@
     "pk": 2,
     "fields": {
       "name": "Corolla",
-      "brand": 3
+      "brand": 3,
+      "price": "$25,000"
     }
   },
   {
@@ -41,7 +46,8 @@
     "pk": 3,
     "fields": {
       "name": "Soul",
-      "brand": 2
+      "brand": 2,
+      "price": "$30,000"
     }
   }
 ]

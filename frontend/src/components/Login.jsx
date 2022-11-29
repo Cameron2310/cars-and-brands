@@ -25,7 +25,7 @@ export default function Login() {
         password: password,
       },
     });
-    console.log(response.data);
+    console.log(post.data);
   };
 
   return (

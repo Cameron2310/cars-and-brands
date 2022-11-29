@@ -48,6 +48,7 @@ export default function Brand() {
             );
           })}
         </ul>
+        <img src={data.img} />
       </div>
     );
   }
